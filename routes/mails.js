@@ -92,31 +92,4 @@ router.get('/contacts/:id', (req, res) => {
         })
 });
 
-// // Second method - it shows only you mailed contacts with has database
-// router.get('/contacts/:id', (req, res) => {
-//     const { username } = req.headers;
-//     Mail.find({ users: { $in: username } }).select(["users",])
-//         .then((mails) => {
-//             if (!mails) {
-//                 return res.status(422).json({ error: "You don't have any contacts" });
-//             }
-//             // // // let usersArr = mails.map((arr) => arr.users[1]); // First try fail - other may not get contacts 
-//             let mailedUsers = []; 
-//             mails.map((arr) =>
-//                 arr.users.map((val) => {
-//                     console.log(val);
-//                     if (val !== username) mailedUsers.push(val);
-//                 }));
-//             User.find({
-//                 "username": { $in: mailedUsers }
-//             }, function (err, users) {
-//                 if (err) console.log(err);
-//                 res.json(users);
-//             })
-//         })
-//         .catch(err => {
-//             console.log(err);
-//         })
-// });
-
 module.exports = router;
