@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const mongoose = require("mongoose");
-// const cors = require("cors");
+const cors = require("cors");
 const path = require('path');
 const dotenv = require("dotenv");
 dotenv.config();
@@ -15,12 +15,12 @@ app.use(express.json());
 app.use(require('./routes/user'));
 app.use(require('./routes/mails'));
 
-// const corsOptions = {
-//     origins: "*",
-//     credentials: true,
-//     optionSuccessStatus: 200,
-// }
-// app.use(cors(corsOptions));
+const corsOptions = {
+    origins: "*",
+    credentials: true,
+    optionSuccessStatus: 200,
+}
+app.use(cors(corsOptions));
 
 mongoose
     .connect(process.env.DATABASE_URL, {
