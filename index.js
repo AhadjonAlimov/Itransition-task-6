@@ -14,9 +14,6 @@ require("./models/mailRoom");
 app.use(express.json());
 app.use(require('./routes/user'));
 app.use(require('./routes/mails'));
-const domainsFromEnv = process.env.CORS_DOMAINS || ""
-
-const whitelist = domainsFromEnv.split(",").map(item => item.trim())
 
 const corsOptions = {
     origins: "*",
