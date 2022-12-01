@@ -15,6 +15,11 @@ app.use(express.json());
 app.use(cors());
 app.use(require('./routes/user'));
 app.use(require('./routes/mails'));
+app.use(function (request, response, next) {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 mongoose
     .connect(process.env.DATABASE_URL, {
