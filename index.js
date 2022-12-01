@@ -12,14 +12,23 @@ require("./models/user");
 require("./models/mails");
 require("./models/mailRoom");
 app.use(express.json());
-app.use(cors());
 app.use(require('./routes/user'));
 app.use(require('./routes/mails'));
-app.use(function (request, response, next) {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+const domainsFromEnv = process.env.CORS_DOMAINS || ""
+
+const whitelist = domainsFromEnv.split(",").map(item => item.trim())
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
+  credentials: true,
+}
+app.use(cors(corsOptions))
 
 mongoose
     .connect(process.env.DATABASE_URL, {
