@@ -16,7 +16,7 @@ app.use(require('./routes/user'));
 app.use(require('./routes/mails'));
 
 const corsOptions = {
-    origins: "*",
+    origins: "https://itransition-task6-mailing.onrender.com",
     credentials: true,
     optionSuccessStatus: 200,
 }
